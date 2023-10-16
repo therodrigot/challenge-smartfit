@@ -1,0 +1,26 @@
+.logo-wrapper {
+	background: var(--dark-grey);
+	margin-bottom: 80px;
+	padding: 25px;
+	img {
+		display: block;
+		margin: auto;
+		width: 180px;
+		max-width: 90%;
+	}
+}
+.text-wrapper {
+	margin-bottom: 45px;
+	h1 {
+		font-size: 50px;
+		margin-bottom: 35px;
+		&::after {
+			content: "";
+			margin-top: 20px;
+			display: block;
+			width: 80px;
+			height: 10px;
+			background: var(--dark-grey);
+		}
+	}
+}
