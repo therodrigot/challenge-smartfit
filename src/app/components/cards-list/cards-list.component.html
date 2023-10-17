@@ -1,0 +1,7 @@
+<div class="container my-5">
+	<ul class="card-list row gy-4">
+		<li class="col-12 col-md-6 col-lg-4" *ngFor="let card of unitsList">
+			<app-card [card]="card" class="d-block h-100"></app-card>
+		</li>
+	</ul>
+</div>
