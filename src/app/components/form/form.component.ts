@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GetUnitsService } from 'src/app/services/get-units.service';
 
@@ -8,8 +8,10 @@ import { GetUnitsService } from 'src/app/services/get-units.service';
 	styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
-	results = [];
-	filteredResults = [];
+	@Output() submitEvent = new EventEmitter();
+
+	results:any[] = [];
+	filteredResults:any[] = [];
 	formGroup!: FormGroup;
 
 	constructor(
@@ -18,9 +20,7 @@ export class FormComponent {
 	) { }
 
 	ngOnInit(): void {
-		this.unitService.getAllUnits().subscribe((data: any) => {
-			this.results = data?.locations;
-		});
+		this.unitService.getAllUnits().subscribe(data => { this.results = data; this.filteredResults = data });
 
 		this.formGroup = this.formBuilder.group({
 			periodo: '',
@@ -31,11 +31,11 @@ export class FormComponent {
 	onSubmit(): void {
 		const periodo = this.formGroup.value.periodo;
 		const showClosed = this.formGroup.value.showClosed
-		this.filteredResults = this.unitService.getFilteredUnits(this.results, periodo, showClosed)
+		this.filteredResults = this.unitService.filterUnits(periodo, showClosed)
+		this.submitEvent.emit();
 	}
 
 	onClean(): void {
-		console.log('clean');
 		this.formGroup.reset();
 	}
 }
