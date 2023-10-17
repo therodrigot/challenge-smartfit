@@ -40,6 +40,7 @@ export class FormComponent {
 	onClean(): void {
 		this.formGroup.reset();
 		this.unitService.setFilteredUnits([])
+		this.filteredResults = []
 		this.submitEvent.emit();
 	}
 }
