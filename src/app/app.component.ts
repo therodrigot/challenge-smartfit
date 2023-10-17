@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { GetUnitsService } from './services/get-units.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'challenge-smartfit';
+  showList = new BehaviorSubject(false);
+  unitsList: any[] = [];
+
+  constructor(private unitService: GetUnitsService) { }
+
+  onSubmit() {
+    this.unitsList = this.unitService.getFilteredUnits();
+    this.showList.next(true);
+
+    console.log(this.unitsList);
+
+  }
 }
