@@ -10,8 +10,8 @@ import { GetUnitsService } from 'src/app/services/get-units.service';
 export class FormComponent {
 	@Output() submitEvent = new EventEmitter();
 
-	results:any[] = [];
-	filteredResults:any[] = [];
+	results: any[] = [];
+	filteredResults: any[] = [];
 	formGroup!: FormGroup;
 
 	constructor(
@@ -31,11 +31,15 @@ export class FormComponent {
 	onSubmit(): void {
 		const periodo = this.formGroup.value.periodo;
 		const showClosed = this.formGroup.value.showClosed
+		if (!periodo) return;
+
 		this.filteredResults = this.unitService.filterUnits(periodo, showClosed)
 		this.submitEvent.emit();
 	}
 
 	onClean(): void {
 		this.formGroup.reset();
+		this.unitService.setFilteredUnits([])
+		this.submitEvent.emit();
 	}
 }

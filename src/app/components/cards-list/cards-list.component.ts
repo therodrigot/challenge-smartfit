@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./cards-list.component.scss']
 })
 export class CardsListComponent {
-  @Input() unitsList: Location[] = [];
+  @Input() unitsList: any[] = [];
 }
