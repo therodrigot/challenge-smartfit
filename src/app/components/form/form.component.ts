@@ -20,7 +20,7 @@ export class FormComponent {
 	) { }
 
 	ngOnInit(): void {
-		this.unitService.getAllUnits().subscribe(data => { this.results = data; this.filteredResults = data });
+		this.unitService.getAllUnits().subscribe(data => { this.results = data; });
 
 		this.formGroup = this.formBuilder.group({
 			periodo: '',
